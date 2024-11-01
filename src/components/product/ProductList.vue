@@ -72,7 +72,7 @@
     <div class="row row-cols-2 row-cols-md-6 g-3">
       <div
         class="col"
-        v-for="(product, index) in products.slice(5, products.length)"
+        v-for="(product, index) in products.slice(5, 10)"
         :key="product.id"
       >
         <div class="card h-100">

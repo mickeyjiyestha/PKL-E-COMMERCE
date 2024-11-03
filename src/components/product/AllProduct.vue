@@ -6,18 +6,27 @@
     </div>
     <div class="row row-cols-2 row-cols-md-6 g-3">
       <div class="col" v-for="(product, index) in products" :key="product.id">
-        <div class="card h-100">
-          <img :src="product.image" class="card-img-top" alt="Product Image" />
-          <div class="card-body">
-            <p class="card-title">{{ product.price }}</p>
-            <p class="card-text">{{ product.name }}</p>
+        <router-link
+          :to="`/product/${product.id}`"
+          style="text-decoration: none"
+        >
+          <div class="card cardHome h-100">
+            <img
+              :src="product.image"
+              class="card-img-top"
+              alt="Product Image"
+            />
+            <div class="card-body">
+              <p class="card-title" style="color: black">{{ product.price }}</p>
+              <p class="card-text">{{ product.name }}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">
+                {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
+              </small>
+            </div>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">
-              {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
-            </small>
-          </div>
-        </div>
+        </router-link>
       </div>
     </div>
   </div>

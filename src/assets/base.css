@@ -115,7 +115,7 @@ body {
   background-color: #eafeff;
 }
 
-.card:hover {
+.cardHome:hover {
   background-color: #eafeff;
 }
 
@@ -209,4 +209,14 @@ footer {
 .btnProfileMenu {
   background-color: #0d6a6e !important;
   color: white !important;
+}
+
+.btnBuyDetail {
+  background-color: #0d6a6e !important;
+  color: white !important;
+}
+
+.btnBuyDetail:hover {
+  background-color: #2bced8 !important;
+  color: #0d6abla !important;
 }

@@ -5,6 +5,7 @@ import NewProductPage from "./components/pages/NewProductPage.vue";
 import ProductPage from "./components/pages/ProductPage.vue";
 import SignupPage from "./components/pages/SignupPage.vue";
 import UserPage from "./components/pages/UserPage.vue";
+import ProductDetail from "./components/detail/ProductDetail.vue";
 
 export const routes = [
   {
@@ -36,5 +37,10 @@ export const routes = [
     path: "/user",
     name: "userPage",
     component: UserPage,
+  },
+  {
+    path: "/product/:id",
+    name: "productdetail",
+    component: ProductDetail,
   },
 ];

@@ -5,6 +5,7 @@ export default {
   state() {
     return {
       products: [],
+      productDetail: {},
     };
   },
   getters: {},
@@ -14,6 +15,9 @@ export default {
     },
     setNewProduct(state, payload) {
       state.products.push.payload;
+    },
+    setProductDetail(state, payload) {
+      state.productDetail = payload;
     },
   },
   actions: {
@@ -48,6 +52,14 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    async getProductDetail({ commit }, payload) {
+      try {
+        const { data } = await axios.get(
+          `https://final-vue-test-default-rtdb.firebaseio.com/products/${payload}.json`
+        );
+        commit("setProductDetail", data);
+      } catch (err) {}
     },
   },
 };

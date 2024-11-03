@@ -10,23 +10,32 @@
         v-for="(product, index) in products.slice(0, 5)"
         :key="product.id"
       >
-        <div class="card h-100">
-          <img :src="product.image" class="card-img-top" alt="Product Image" />
-          <div class="card-body">
-            <p class="card-title">{{ product.price }}</p>
-            <p class="card-text">{{ product.name }}</p>
+        <router-link
+          :to="`/product/${product.id}`"
+          style="text-decoration: none"
+        >
+          <div class="card cardHome h-100">
+            <img
+              :src="product.image"
+              class="card-img-top"
+              alt="Product Image"
+            />
+            <div class="card-body">
+              <p class="card-title">{{ product.price }}</p>
+              <p class="card-text">{{ product.name }}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">
+                {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
+              </small>
+            </div>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">
-              {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
-            </small>
-          </div>
-        </div>
+        </router-link>
       </div>
 
       <!-- SEE ALL PRODUCT 1 -->
       <div v-if="products.length >= 5" class="col">
-        <div class="card h-100 card-background">
+        <div class="card cardHome h-100 card-background">
           <div
             class="card-body d-flex justify-content-center align-items-center"
           >
@@ -75,23 +84,32 @@
         v-for="(product, index) in products.slice(5, 10)"
         :key="product.id"
       >
-        <div class="card h-100">
-          <img :src="product.image" class="card-img-top" alt="Product Image" />
-          <div class="card-body">
-            <p class="card-title">{{ product.price }}</p>
-            <p class="card-text">{{ product.name }}</p>
+        <router-link
+          :to="`/product/${product.id}`"
+          style="text-decoration: none"
+        >
+          <div class="card cardHome h-100">
+            <img
+              :src="product.image"
+              class="card-img-top"
+              alt="Product Image"
+            />
+            <div class="card-body">
+              <p class="card-title">{{ product.price }}</p>
+              <p class="card-text">{{ product.name }}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">
+                {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
+              </small>
+            </div>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">
-              {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
-            </small>
-          </div>
-        </div>
+        </router-link>
       </div>
 
       <!-- SEE ALL PRODUCT -->
       <div v-if="products.length >= 10" class="col">
-        <div class="card h-100 card-background">
+        <div class="card cardHome h-100 card-background">
           <div
             class="card-body d-flex justify-content-center align-items-center"
           >

@@ -66,9 +66,20 @@ export default {
         const { data } = await axios.delete(
           `https://final-vue-test-default-rtdb.firebaseio.com/products/${payload}.json?auth=${rootState.auth.token}`
         );
-        await dispatch("getRecipeData");
+        await dispatch("getProductData");
       } catch (err) {
         console.log(err);
+      }
+    },
+    async updateProduct({ dispatch, rootState }, { id, newProduct }) {
+      try {
+        const { data } = await axios.put(
+          `https://final-vue-test-default-rtdb.firebaseio.com/products/${id}.json?auth=${rootState.auth.token}`,
+          newProduct
+        );
+        await dispatch("getProductData");
+      } catch (error) {
+        console.log(error);
       }
     },
   },

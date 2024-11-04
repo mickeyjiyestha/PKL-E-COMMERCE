@@ -142,10 +142,11 @@ import "@/assets/base.css";
 import BaseButton from "../ui/BaseButton.vue";
 import BaseInput from "../ui/BaseInput.vue";
 import { reactive } from "vue";
+import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-const productData = reactive({
+const productData = ref({
   category: "",
   color: "",
   description: "",
@@ -166,7 +167,7 @@ const checkImage = (e) => {
 
   const reader = new FileReader();
   reader.onload = () => {
-    productData.image = reader.result;
+    productData.value.image = reader.result;
   };
   reader.readAsDataURL(file);
 };
@@ -176,8 +177,26 @@ const router = useRouter();
 
 const addNewProduct = async () => {
   const route = router.currentRoute.value;
-  await store.dispatch("product/addNewProduct", productData);
 
-  router.push("/user");
+  if (props.isEdit) {
+    await store.dispatch("product/updateProduct", {
+      id: route.params.id,
+      newProduct: productData.value,
+    });
+  } else {
+    await store.dispatch("product/addNewProduct", productData.value);
+  }
+
+  router.push("/user/user-product");
 };
+
+const props = defineProps({
+  isEdit: { type: Boolean, default: false },
+});
+
+onMounted(() => {
+  if (props.isEdit) {
+    productData.value = store.state.product.productDetail;
+  }
+});
 </script>

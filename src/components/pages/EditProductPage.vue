@@ -27,7 +27,6 @@ onMounted(async () => {
 
   await store.dispatch("product/getProductDetail", productId);
 
-  // Assign the fetched data to `detailData`
   detailData.value = store.state.product.productDetail;
   isLoading.value = false;
 });

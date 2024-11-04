@@ -55,4 +55,8 @@ const deleteProduct = async (id) => {
 const goToAddProduct = () => {
   router.push({ name: "newProductPage" });
 };
+
+const goToEditProduct = (id) => {
+  router.push({ name: "editProductPage", params: { id } });
+};
 </script>

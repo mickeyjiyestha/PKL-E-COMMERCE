@@ -6,12 +6,22 @@ import ProductPage from "./components/pages/ProductPage.vue";
 import SignupPage from "./components/pages/SignupPage.vue";
 import UserPage from "./components/pages/UserPage.vue";
 import ProductDetail from "./components/detail/ProductDetail.vue";
+import EditProductPage from "./components/pages/EditProductPage.vue";
+import Cookies from "js-cookie";
+import { store } from "./store/index";
+
+function checkAuth() {
+  return store.state.auth.token && store.state.auth.isLogin;
+}
 
 export const routes = [
   {
     path: "/",
     name: "HomePage",
     component: HomePage,
+    beforeEnter: () => {
+      checkAuth();
+    },
   },
   {
     path: "/login",
@@ -34,13 +44,21 @@ export const routes = [
     component: NewProductPage,
   },
   {
-    path: "/user",
+    path: "/user/:component",
     name: "userPage",
     component: UserPage,
+    beforeEnter: (to, from, next) => {
+      checkAuth() ? next() : next({ name: "loginpage" });
+    },
   },
   {
     path: "/product/:id",
     name: "productdetail",
     component: ProductDetail,
+  },
+  {
+    path: "/product/edit/:id",
+    name: "editProductPage",
+    component: EditProductPage,
   },
 ];

@@ -61,5 +61,15 @@ export default {
         commit("setProductDetail", data);
       } catch (err) {}
     },
+    async deleteProduct({ dispatch, rootState }, payload) {
+      try {
+        const { data } = await axios.delete(
+          `https://final-vue-test-default-rtdb.firebaseio.com/products/${payload}.json?auth=${rootState.auth.token}`
+        );
+        await dispatch("getRecipeData");
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };

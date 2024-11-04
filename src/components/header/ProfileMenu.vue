@@ -16,7 +16,7 @@
         <img src="@/assets/images/userLogo.png" alt="" width="80px" />
       </a>
       <ul class="dropdown-menu">
-        <router-link to="/user" class="dropdown-item"
+        <router-link to="/user/personal-info  " class="dropdown-item"
           ><i class="fa-regular fa-user"></i> Profile
         </router-link>
         <router-link to="" class="dropdown-item"

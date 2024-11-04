@@ -1,7 +1,9 @@
 <template>
   <header class="container">
     <nav style="margin-top: -15px; margin-bottom: -15px">
-      <div class="d-flex justify-content-between align-items-center">
+      <div
+        class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+      >
         <!-- Logo -->
         <router-link to="/">
           <img
@@ -12,7 +14,10 @@
         </router-link>
 
         <!-- Center Items -->
-        <div class="d-flex align-items-center ms-4" style="flex-grow: 1">
+        <div
+          class="d-flex align-items-center ms-4 mt-3 mt-md-0"
+          style="flex-grow: 1"
+        >
           <form class="d-flex me-3" role="search" style="flex-grow: 1">
             <input
               class="form-control me-2"
@@ -24,7 +29,6 @@
           </form>
 
           <!-- Conditional Rendering for Menu Components -->
-          <!-- MenuHeader shown before sign-in, ProfileMenu after sign-in -->
           <menu-header v-if="!isAuthenticated" />
           <profile-menu v-else />
         </div>

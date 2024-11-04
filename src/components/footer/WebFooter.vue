@@ -1,8 +1,8 @@
 <template>
   <!--FOOTER-->
   <footer class="p-5">
-    <div class="d-flex justify-content-around">
-      <div class="me-5">
+    <div class="d-flex flex-column flex-md-row justify-content-around">
+      <div class="me-5 mb-3 mb-md-0">
         <ul class="list-unstyled">
           <li class="m-2"><strong>Vintage</strong></li>
           <li class="m-2">About Us</li>
@@ -12,7 +12,7 @@
         </ul>
       </div>
 
-      <div class="me-5">
+      <div class="me-5 mb-3 mb-md-0">
         <ul class="list-unstyled">
           <li class="m-2"><strong>Discover</strong></li>
           <li class="m-2">How it works</li>
@@ -22,7 +22,7 @@
         </ul>
       </div>
 
-      <div class="me-5">
+      <div class="me-5 mb-3 mb-md-0">
         <ul class="list-unstyled">
           <li class="m-2"><strong>Help</strong></li>
           <li class="m-2">Help Center</li>
@@ -31,7 +31,7 @@
         </ul>
       </div>
 
-      <div>
+      <div class="me-5 mb-3 mb-md-0">
         <ul class="list-unstyled">
           <li class="m-2"><strong>Community</strong></li>
           <li class="m-2">Forum</li>
@@ -41,8 +41,10 @@
 
     <hr class="my-4" />
 
-    <div class="d-flex justify-content-between align-items-center">
-      <div>
+    <div
+      class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+    >
+      <div class="mb-3 mb-md-0">
         <i class="fa-brands fa-linkedin me-2"></i>
         <i class="fa-brands fa-whatsapp me-2"></i>
         <i class="fa-brands fa-instagram"></i>

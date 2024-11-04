@@ -36,6 +36,18 @@
               white-space: nowrap;
               cursor: pointer;
             "
+            @click="menuClicked('user-product')"
+          >
+            My Product
+          </li>
+          <li
+            class="list-group-item"
+            style="
+              border: none;
+              background-color: transparent;
+              white-space: nowrap;
+              cursor: pointer;
+            "
             @click="menuClicked('personal-info')"
           >
             Transaction History

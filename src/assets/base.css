@@ -220,3 +220,68 @@ footer {
   background-color: #2bced8 !important;
   color: #0d6abla !important;
 }
+
+footer {
+  padding: 2rem;
+}
+
+footer .list-unstyled li {
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 375px) {
+  footer {
+    padding: 1rem;
+  }
+
+  .d-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .me-5 {
+    margin-right: 0;
+  }
+
+  .justify-content-around {
+    justify-content: center;
+  }
+
+  header {
+    padding: 1rem;
+  }
+
+  header .d-flex {
+    flex-direction: column; /* Stack items on small screens */
+  }
+
+  nav img {
+    max-width: 100%; /* Ensure logo scales appropriately */
+    height: auto;
+  }
+
+  @media (min-width: 576px) {
+    header .d-flex {
+      flex-direction: row; /* Align items horizontally on larger screens */
+      justify-content: space-between;
+    }
+
+    .ms-4 {
+      margin-left: 1rem; /* Add margin for larger screens */
+    }
+
+    .mt-3 {
+      margin-top: 0; /* Remove margin on larger screens */
+    }
+  }
+
+  @media (max-width: 375px) {
+    nav {
+      padding: 0.5rem; /* Adjust padding for small screens */
+    }
+
+    .form-control {
+      width: 100%; /* Ensure search input takes full width */
+    }
+  }
+}

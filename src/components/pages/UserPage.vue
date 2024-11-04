@@ -18,6 +18,7 @@ import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import PasswordInfo from "../user/PasswordInfo.vue";
+import UserProduct from "../user/UserProduct.vue";
 
 const route = useRoute();
 const store = useStore();
@@ -26,6 +27,7 @@ const userData = computed(() => store.state.auth.userLogin);
 const componentMap = {
   "personal-info": PersonalInfo,
   "password-info": PasswordInfo,
+  "user-product": UserProduct,
 };
 
 const currentComponent = ref(null);

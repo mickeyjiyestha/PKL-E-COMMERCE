@@ -78,7 +78,7 @@
     <div class="row row-cols-2 row-cols-md-6 g-3">
       <div
         class="col"
-        v-for="(product, index) in products.slice(0, 10)"
+        v-for="(product, index) in products.slice(0, 15)"
         :key="product.id"
       >
         <div class="card h-100">

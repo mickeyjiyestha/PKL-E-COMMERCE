@@ -8,7 +8,7 @@
           <base-input
             type="text"
             identity="category"
-            label="Identity"
+            label="Category"
             placeholder="Product category"
             v-model="productData.category"
           />
@@ -76,6 +76,7 @@
             type="text"
             identity="shipping"
             label="Shipping"
+            placeholder="Product shippping"
             v-model="productData.shipping"
           />
         </div>
@@ -87,6 +88,46 @@
             label="Size"
             placeholder="Product size"
             v-model="productData.size"
+          />
+        </div>
+
+        <div class="mb-3">
+          <base-input
+            type="text"
+            identity="city"
+            label="City"
+            placeholder="City"
+            v-model="productData.city"
+          />
+        </div>
+
+        <div class="mb-3">
+          <base-input
+            type="text"
+            identity="condition"
+            label="Condition"
+            placeholder="Product Condition"
+            v-model="productData.condition"
+          />
+        </div>
+
+        <div class="mb-3">
+          <base-input
+            type="text"
+            identity="quantity"
+            label="Quantity"
+            placeholder="Product quantity"
+            v-model="productData.quantity"
+          />
+        </div>
+
+        <div class="mb-3">
+          <base-input
+            type="text"
+            identity="like"
+            label="Like"
+            placeholder="Product like"
+            v-model="productData.like"
           />
         </div>
 
@@ -113,6 +154,10 @@ const productData = reactive({
   price: "",
   shipping: "",
   size: "",
+  city: "",
+  condition: "",
+  quantity: "",
+  like: "",
 });
 
 const checkImage = (e) => {
@@ -133,6 +178,6 @@ const addNewProduct = async () => {
   const route = router.currentRoute.value;
   await store.dispatch("product/addNewProduct", productData);
 
-  router.push("/");
+  router.push("/user");
 };
 </script>

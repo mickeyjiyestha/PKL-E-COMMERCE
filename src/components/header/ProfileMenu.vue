@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/">
+  <router-link to="/user/cart">
     <img src="@/assets/images/cart.png" alt="cart logo" width="80px" />
   </router-link>
   <router-link to="/">

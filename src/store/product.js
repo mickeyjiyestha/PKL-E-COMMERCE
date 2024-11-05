@@ -6,6 +6,7 @@ export default {
     return {
       products: [],
       productDetail: {},
+      cartItems: [],
     };
   },
   getters: {},
@@ -18,6 +19,9 @@ export default {
     },
     setProductDetail(state, payload) {
       state.productDetail = payload;
+    },
+    setCartData(state, payload) {
+      state.cartItems = payload;
     },
   },
   actions: {
@@ -51,6 +55,34 @@ export default {
         commit("setNewProduct", { id: data.name, ...newData });
       } catch (err) {
         console.log(err);
+      }
+    },
+    async addToCart({ rootState }, productDetail) {
+      // Buat objek cartItem dengan semua detail produk yang diperlukan
+      const cartItem = {
+        id: productDetail.id, // Menyimpan ID produk
+        image: productDetail.image, // Menyimpan URL gambar
+        name: productDetail.name, // Menyimpan nama produk
+        price: productDetail.price, // Menyimpan harga produk
+        size: productDetail.size, // Menyimpan ukuran produk
+        quantity: productDetail.quantity, // Menyimpan jumlah produk
+        condition: productDetail.condition, // Menyimpan kondisi produk
+        city: productDetail.city, // Menyimpan kota produk
+        description: productDetail.description, // Menyimpan deskripsi produk
+        status: "no paid", // Status cart
+        userId: rootState.auth.userLogin.userId, // ID pengguna yang menambah ke cart
+        createdAt: Date.now(), // Waktu penambahan
+      };
+
+      try {
+        // Kirim cartItem ke Firebase
+        await axios.post(
+          `https://final-vue-test-default-rtdb.firebaseio.com/carts.json?auth=${rootState.auth.token}`,
+          cartItem
+        );
+        console.log("Item added to cart:", cartItem);
+      } catch (err) {
+        console.log("Error adding item to cart:", err);
       }
     },
     async getProductDetail({ commit }, payload) {
@@ -89,6 +121,26 @@ export default {
           payload
         );
         commit("setUserLogin", { userData: payload, loginStatus: true });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getCartData({ commit, rootState }) {
+      try {
+        const { data } = await axios.get(
+          `https://final-vue-test-default-rtdb.firebaseio.com/carts.json?auth=${rootState.auth.token}`
+        );
+        const cartItems = [];
+        for (let key in data) {
+          // Memfilter cartItems berdasarkan userId
+          if (
+            data[key].status === "no paid" &&
+            data[key].userId === rootState.auth.userLogin.userId
+          ) {
+            cartItems.push({ id: key, ...data[key] });
+          }
+        }
+        commit("setCartData", cartItems);
       } catch (err) {
         console.log(err);
       }

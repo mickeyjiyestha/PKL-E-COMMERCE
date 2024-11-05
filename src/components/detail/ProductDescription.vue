@@ -64,8 +64,12 @@
               </tbody>
             </table>
             <div class="card-footer">
-              <button class="btn btnBuyDetail w-100 mb-2">Buy Now</button>
-              <button class="btn btnBuyDetail w-100">Add to Cart</button>
+              <button class="btn btnBuyDetail w-100 mb-2" @click="addToCart">
+                Buy Now
+              </button>
+              <button class="btn btnBuyDetail w-100" @click="addToCart">
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
@@ -111,4 +115,21 @@ const productDetail = computed(() => {
 defineProps({
   products: Array,
 });
+
+// Fungsi untuk menambahkan produk ke cart
+const addToCart = async () => {
+  await store.dispatch("product/addToCart", {
+    id: productDetail.value.id, // Tambahkan ID produk
+    image: productDetail.value.image, // Tambahkan URL gambar produk
+    name: productDetail.value.name,
+    price: productDetail.value.price,
+    size: productDetail.value.size,
+    quantity: productDetail.value.quantity,
+    color: productDetail.value.color,
+    condition: productDetail.value.condition,
+    city: productDetail.value.city,
+    description: productDetail.value.description, // Tambahkan deskripsi produk
+  });
+  alert("Product added to cart!");
+};
 </script>

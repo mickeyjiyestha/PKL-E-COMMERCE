@@ -9,6 +9,7 @@ import ProductDetail from "./components/detail/ProductDetail.vue";
 import EditProductPage from "./components/pages/EditProductPage.vue";
 import Cookies from "js-cookie";
 import { store } from "./store/index";
+import CartPage from "./components/pages/CartPage.vue";
 
 function checkAuth() {
   return store.state.auth.token && store.state.auth.isLogin;
@@ -22,6 +23,11 @@ export const routes = [
     beforeEnter: () => {
       checkAuth();
     },
+  },
+  {
+    path: "/user/cart",
+    name: "Cart",
+    component: CartPage,
   },
   {
     path: "/login",

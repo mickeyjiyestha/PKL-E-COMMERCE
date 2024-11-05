@@ -82,5 +82,16 @@ export default {
         console.log(error);
       }
     },
+    async updateUser({ commit, state }, payload) {
+      try {
+        await axios.put(
+          `https://final-vue-test-default-rtdb.firebaseio.com/user/${state.userLogin.userId}.json?auth=${state.token}`,
+          payload
+        );
+        commit("setUserLogin", { userData: payload, loginStatus: true });
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };

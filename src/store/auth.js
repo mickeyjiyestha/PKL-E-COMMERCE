@@ -57,6 +57,7 @@ export default {
           fullname: payload.fullname,
           username: payload.username,
           email: payload.email,
+          image: payload.image || "https://example.com/default-profile.png",
         };
         Cookies.set("UID", newUserData.userId);
         await dispatch("addNewUser", newUserData);
@@ -66,9 +67,9 @@ export default {
     },
     async addNewUser({ commit, state }, payload) {
       try {
-        const { data } = await axios.post(
-          `https://final-vue-test-default-rtdb.firebaseio.com
-/user.json?auth=${state.token}`,
+        // Menggunakan userId sebagai kunci saat menyimpan data
+        await axios.put(
+          `https://final-vue-test-default-rtdb.firebaseio.com/user/${payload.userId}.json?auth=${state.token}`,
           payload
         );
         commit("setUserLogin", { userData: payload, loginStatus: true });
@@ -77,7 +78,6 @@ export default {
       }
     },
     async getLoginData({ commit, dispatch }, payload) {
-      console.log("Login Payload:", payload);
       const APIkey = "AIzaSyBY-aLJgME0AOWaAI6_ZNJ2olSNFKzzWQo";
       const authUrl =
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
@@ -92,27 +92,38 @@ export default {
           expiresIn:
             new Date().getTime() + Number.parseInt(data.expiresIn) * 1000,
         });
-        console.log("Local ID:", data.localId);
         await dispatch("getUser", data.localId);
       } catch (err) {
         console.log(err);
       }
     },
-    async getUser({ commit }, payload) {
+    async getUser({ commit }, userId) {
       try {
+        // Langsung mengambil data pengguna berdasarkan userId
         const { data } = await axios.get(
-          `https://final-vue-test-default-rtdb.firebaseio.com/user.json`
+          `https://final-vue-test-default-rtdb.firebaseio.com/user/${userId}.json`
         );
-        console.log("User Data from API:", data);
-        for (let key in data) {
-          if (data[key].userId === payload) {
-            Cookies.set("UID", data[key].userId);
-            commit("setUserLogin", { userData: data[key], loginStatus: true });
-            return;
-          }
+        if (data) {
+          Cookies.set("UID", data.userId);
+          commit("setUserLogin", { userData: data, loginStatus: true });
         }
       } catch (err) {
         console.log(err);
+      }
+    },
+    async updateUserProfile({ state }, updatedData) {
+      try {
+        const userId = state.userLogin.userId;
+        await axios.patch(
+          `https://final-vue-test-default-rtdb.firebaseio.com/user/${userId}.json?auth=${state.token}`,
+          updatedData
+        );
+
+        // Mutate user data after update
+        state.userLogin = { ...state.userLogin, ...updatedData };
+        console.log("Profile updated successfully");
+      } catch (error) {
+        console.error("Error updating profile:", error);
       }
     },
   },

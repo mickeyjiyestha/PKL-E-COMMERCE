@@ -25,9 +25,10 @@
               <p class="card-text">{{ product.name }}</p>
             </div>
             <div class="card-footer">
-              <small class="text-muted">
-                {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
-              </small>
+              <small class="text-muted"
+                >{{ product.quantity }} / {{ product.size }} ♥
+                {{ product.like }}</small
+              >
             </div>
           </div>
         </router-link>
@@ -98,10 +99,21 @@
               <p class="card-title">{{ product.price }}</p>
               <p class="card-text">{{ product.name }}</p>
             </div>
-            <div class="card-footer">
+            <div
+              class="card-footer d-flex justify-content-between align-items-center"
+            >
               <small class="text-muted">
-                {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
+                {{ product.size }} / {{ product.color }}
               </small>
+              <!-- Heart Icon for Favorite -->
+              <i
+                class="fa-heart"
+                :class="
+                  product.isFavorited ? 'fa-solid text-danger' : 'fa-regular'
+                "
+                @click.stop="toggleFavorite(product)"
+                style="cursor: pointer"
+              ></i>
             </div>
           </div>
         </router-link>
@@ -130,7 +142,15 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+
+// Define products prop and initialize with a favorite state
 defineProps({
   products: Array,
 });
+
+// Function to toggle favorite status
+const toggleFavorite = (product) => {
+  product.isFavorited = !product.isFavorited;
+};
 </script>

@@ -12,6 +12,7 @@ export default {
       tokenExpirationDate: null,
       userLogin: {},
       isLogin: false,
+      paidCartItems: [],
     };
   },
   mutations: {
@@ -24,6 +25,9 @@ export default {
     setUserLogin(state, { userData, loginStatus }) {
       state.userLogin = userData;
       state.isLogin = loginStatus;
+    },
+    setPaidCartItems(state, paidCartItems) {
+      state.paidCartItems = paidCartItems;
     },
     setUserLogout(state) {
       state.token = null;
@@ -124,6 +128,42 @@ export default {
         console.log("Profile updated successfully");
       } catch (error) {
         console.error("Error updating profile:", error);
+      }
+    },
+    async fetchPaidCartItems({ state, commit }) {
+      try {
+        const userId = state.userLogin.userId;
+        if (!userId) {
+          console.error("User is not logged in.");
+          return;
+        }
+
+        console.log("Fetching paid cart items for user:", userId);
+
+        // Fetch all cart items from Firebase
+        const { data } = await axios.get(
+          `https://final-vue-test-default-rtdb.firebaseio.com/carts.json`
+        );
+
+        console.log("Raw data from Firebase:", data);
+
+        if (!data) {
+          console.log("No cart items found for any user.");
+          commit("setPaidCartItems", []);
+          return;
+        }
+
+        // Filter only the items with the correct userId and status "paid"
+        const paidCartItems = Object.values(data).filter(
+          (item) => item.userId === userId && item.status === "paid"
+        );
+
+        console.log("Filtered Paid Cart Items:", paidCartItems);
+
+        // Commit the result to the state
+        commit("setPaidCartItems", paidCartItems);
+      } catch (err) {
+        console.error("Error fetching paid cart items:", err);
       }
     },
   },

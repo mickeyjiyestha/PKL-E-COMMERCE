@@ -19,6 +19,7 @@ import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import PasswordInfo from "../user/PasswordInfo.vue";
 import UserProduct from "../user/UserProduct.vue";
+import TransactionHistory from "../user/TransactionHistory.vue";
 
 const route = useRoute();
 const store = useStore();
@@ -28,6 +29,7 @@ const componentMap = {
   "personal-info": PersonalInfo,
   "password-info": PasswordInfo,
   "user-product": UserProduct,
+  "transaction-history": TransactionHistory,
 };
 
 const currentComponent = ref(null);

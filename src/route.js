@@ -10,6 +10,8 @@ import EditProductPage from "./components/pages/EditProductPage.vue";
 import Cookies from "js-cookie";
 import { store } from "./store/index";
 import CartPage from "./components/pages/CartPage.vue";
+import ConfirmationOrder from "./components/pages/ConfirmationOrder.vue";
+import FavoritePage from "./components/pages/FavoritePage.vue";
 
 function checkAuth() {
   return store.state.auth.token && store.state.auth.isLogin;
@@ -28,6 +30,16 @@ export const routes = [
     path: "/user/cart",
     name: "Cart",
     component: CartPage,
+  },
+  {
+    path: "/user/favorite",
+    name: "FavoritePage",
+    component: FavoritePage,
+  },
+  {
+    path: "/confirmation-order",
+    name: "ConfirmationOrder",
+    component: ConfirmationOrder,
   },
   {
     path: "/login",

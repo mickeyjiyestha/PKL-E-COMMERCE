@@ -23,6 +23,9 @@ export default {
     setCartData(state, payload) {
       state.cartItems = payload;
     },
+    removeItemFromCart(state, itemId) {
+      state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
+    },
   },
   actions: {
     async getProductData({ commit }) {
@@ -143,6 +146,38 @@ export default {
         commit("setCartData", cartItems);
       } catch (err) {
         console.log(err);
+      }
+    },
+    async updateCartStatusToPaid({ commit, state, rootState }) {
+      try {
+        const updates = state.cartItems.map(async (item) => {
+          if (item.status === "no paid") {
+            console.log(`Updating item ${item.id} status to 'paid'`); // Tambahkan ini
+            await axios.patch(
+              `https://final-vue-test-default-rtdb.firebaseio.com/carts/${item.id}.json?auth=${rootState.auth.token}`,
+              { status: "paid" }
+            );
+          }
+        });
+
+        await Promise.all(updates);
+        commit("setCartData", []); // Clear cart data in state
+        await this.dispatch("getCartData"); // Memanggil ulang getCartData untuk update UI
+        console.log("Status updated to 'paid' for all items in cart");
+      } catch (err) {
+        console.log("Error updating cart status to 'paid':", err);
+      }
+    },
+    async removeItemFromCart({ commit, rootState }, itemId) {
+      try {
+        // Remove item from Firebase (if necessary)
+        await axios.delete(
+          `https://final-vue-test-default-rtdb.firebaseio.com/carts/${itemId}.json?auth=${rootState.auth.token}`
+        );
+        // Commit the mutation to remove the item from the state
+        commit("removeItemFromCart", itemId);
+      } catch (err) {
+        console.log("Error removing item from cart:", err);
       }
     },
   },

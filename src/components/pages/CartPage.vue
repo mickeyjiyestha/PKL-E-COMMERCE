@@ -1,39 +1,25 @@
 <template>
-  <div class="cart-page">
-    <h1>Your Cart</h1>
-    <div v-if="cartItems.length === 0">
-      <p>Your cart is empty.</p>
-    </div>
-    <div v-else>
-      <ul>
-        <li v-for="item in cartItems" :key="item.id">
-          <h2>{{ item.name }}</h2>
-          <p>Price: {{ item.price }}</p>
-          <p>Quantity: {{ item.quantity }}</p>
-          <!-- Anda bisa menambahkan detail lain di sini -->
-        </li>
-      </ul>
-    </div>
-  </div>
+  <cart-description :products="productList"></cart-description>
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import CartDescription from "../cart/CartDescription.vue";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
 const store = useStore();
+const productList = ref([]);
+const route = useRoute();
 
-// Mengambil data cart dari state
-const cartItems = computed(() => store.state.product.cartItems);
-
-// Mengambil data cart saat komponen di-mount
 onMounted(async () => {
-  await store.dispatch("product/getCartData");
+  try {
+    await store.dispatch("product/getProductData");
+    await store.dispatch("product/getProductDetail", route.params.id);
+    productList.value = store.state.product.products;   
+    console.log(productList.value); 
+  } catch (error) {
+    console.log(error);
+  }
 });
 </script>
-
-<style scoped>
-.cart-page {
-  padding: 20px;
-}
-</style>

@@ -1,0 +1,145 @@
+.cart-page {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+.cart-items {
+  flex: 2;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.item-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.remove-button {
+  margin-top: 8px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.item-details h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.cart-summary {
+  flex: 0 0 300px; /* Ukuran tetap untuk ringkasan */
+  position: sticky; /* Menjaga posisi tetap saat menggulir */
+  top: 20px; /* Jarak dari bagian atas */
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: fit-content; /* Mengatur tinggi otomatis sesuai isi */
+}
+
+.card-body {
+  padding: 20px;
+  margin-bottom: 0; /* Menghilangkan jarak bawah tambahan */
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-left h2,
+.summary-left p,
+.summary-right p {
+  margin: 5px 0; /* Mengurangi margin untuk elemen di dalam summary */
+}
+
+.shipping-note {
+  font-size: 14px;
+  color: #666;
+}
+
+.card-body hr {
+  margin: 10px 0; /* Mengurangi margin hr agar tidak terlalu jauh dengan konten di atas/bawah */
+  border: 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.card-footer {
+  padding: 10px 15px; /* Kurangi padding agar lebih dekat dengan card-body */
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.checkout-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #0d6a6e;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+  background-color: #0056b3;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.quantity-selector button {
+  background-color: #0d6a6e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.quantity-selector button:hover {
+  background-color: #0056b3;
+}
+
+.quantity-value {
+  margin-left: 10px;
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  width: 40px;
+}

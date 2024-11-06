@@ -80,23 +80,28 @@
   <div class="container my-5">
     <h5>Other Product</h5>
     <div class="row row-cols-2 row-cols-md-6 g-3">
-      <div
-        class="col"
-        v-for="(product, index) in products.slice(0, 15)"
-        :key="product.id"
-      >
-        <div class="card h-100">
-          <img :src="product.image" class="card-img-top" alt="Product Image" />
-          <div class="card-body">
-            <p class="card-title">{{ product.price }}</p>
-            <p class="card-text">{{ product.name }}</p>
+      <div class="col" v-for="(product, index) in products" :key="product.id">
+        <router-link
+          :to="`/product/${product.id}`"
+          style="text-decoration: none"
+        >
+          <div class="card h-100" style="color: black">
+            <img
+              :src="product.image"
+              class="card-img-top"
+              alt="Product Image"
+            />
+            <div class="card-body">
+              <p class="card-title">{{ product.price }}</p>
+              <p class="card-text">{{ product.name }}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">
+                {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
+              </small>
+            </div>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">
-              {{ product.size }} / {{ product.color }} ♥ {{ product.like }}
-            </small>
-          </div>
-        </div>
+        </router-link>
       </div>
     </div>
   </div>

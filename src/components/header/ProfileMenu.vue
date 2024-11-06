@@ -1,10 +1,24 @@
 <template>
-  <router-link to="/user/cart">
-    <img src="@/assets/images/cart.png" alt="cart logo" width="80px" />
+  <router-link to="/user/cart" class="me-3">
+    <div class="position-relative">
+      <!-- Cart Icon -->
+      <img src="@/assets/images/cart.png" alt="cart logo" width="50px" />
+
+      <!-- Cart Item Count Badge -->
+      <span
+        v-if="cartItemCount > 0"
+        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        style="font-size: 0.8rem; padding: 0.3rem 0.6rem; color: white"
+      >
+        {{ cartItemCount }}
+      </span>
+    </div>
   </router-link>
-  <router-link to="/">
-    <img src="@/assets/images/likeLogo.png" alt="like logo" width="80px" />
+
+  <router-link to="/" class="me-3">
+    <img src="@/assets/images/likeLogo.png" alt="like logo" width="50px" />
   </router-link>
+
   <ul class="navbar-nav">
     <li class="nav-item dropdown">
       <a
@@ -13,10 +27,10 @@
         role="button"
         data-bs-toggle="dropdown"
       >
-        <img src="@/assets/images/userLogo.png" alt="" width="80px" />
+        <img src="@/assets/images/userLogo.png" alt="" width="50px" />
       </a>
       <ul class="dropdown-menu">
-        <router-link to="/user/personal-info  " class="dropdown-item"
+        <router-link to="/user/personal-info" class="dropdown-item"
           ><i class="fa-regular fa-user"></i> Profile
         </router-link>
         <router-link to="" class="dropdown-item"
@@ -69,6 +83,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { computed } from "vue";
 
 const store = useStore();
 const router = useRouter();
@@ -87,4 +102,14 @@ const confirmLogout = () => {
   router.push("/");
   closeModal();
 };
+
+// Computed property to get the cart item count from Vuex store
+const cartItemCount = computed(() => store.state.product.cartItems.length);
 </script>
+
+<style scoped>
+/* Custom spacing between icons */
+.router-link {
+  margin-right: 1.5rem; /* Adjust the spacing as desired */
+}
+</style>

@@ -48,7 +48,7 @@
               white-space: nowrap;
               cursor: pointer;
             "
-            @click="menuClicked('personal-info')"
+            @click="menuClicked('transaction-history')"
           >
             Transaction History
           </li>
